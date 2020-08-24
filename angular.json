@@ -2,5 +2,46 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "third-cms": {
+      "projectType": "library",
+      "root": "projects/third-cms",
+      "sourceRoot": "projects/third-cms/src",
+      "prefix": "the",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/third-cms/tsconfig.lib.json",
+            "project": "projects/third-cms/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/third-cms/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/third-cms/src/test.ts",
+            "tsConfig": "projects/third-cms/tsconfig.spec.json",
+            "karmaConfig": "projects/third-cms/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/third-cms/tsconfig.lib.json",
+              "projects/third-cms/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }},
+  "defaultProject": "third-cms"
 }

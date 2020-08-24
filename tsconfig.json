@@ -6,5 +6,12 @@
 */
 {
   "files": [],
-  "references": []
+  "references": [
+    {
+      "path": "./projects/third-cms/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/third-cms/tsconfig.spec.json"
+    }
+]
 }
