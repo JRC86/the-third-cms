@@ -6,7 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./third-cms.component.css'],
 })
 export class ThirdCmsComponent implements OnInit {
-  constructor() {}
+  imageUrl: String;
+
+  constructor() {
+    this.imageUrl =
+      'https://res.cloudinary.com/carlhernek/image/upload/v1594818036/SAR-demo/Restaurants/orlova-maria-oMTlhdFUhdI-unsplash_tfbudv.jpg';
+  }
 
   ngOnInit(): void {}
 }

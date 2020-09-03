@@ -1,3 +1,14 @@
-p {
-  color: blue;
+.bass-me {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.third-cms-wrapper {
+  background-color: beige;
+}
+
+.third-cms-img {
+  object-fit: cover;
 }
