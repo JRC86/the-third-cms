@@ -1,4 +1,6 @@
+/* CSS Rules */
 .bass-me {
+  position: relative;
   margin: 0 !important;
   padding: 0 !important;
   width: 100% !important;
@@ -6,9 +8,87 @@
 }
 
 .third-cms-wrapper {
-  background-color: beige;
+  background-color: white;
 }
 
 .third-cms-img {
   object-fit: cover;
+}
+
+.third-cms-text {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: pre-line;
+  hyphens: auto;
+  overflow: hidden;
+}
+
+.third-cms-text p {
+  margin: 0.3rem 0.8rem 0 0.8rem;
+  font-size: medium !important;
+}
+
+/* Editing UI CSS  */
+.third-cms-edit {
+  border-radius: 0.7rem;
+  display: flex;
+  flex-flow: row-reverse;
+  top: 0.5rem;
+  right: 0.5rem;
+  position: absolute;
+  background-color: #eeeeee;
+  padding: 0.5rem;
+  z-index: 1;
+
+  box-shadow: 4px 4px 4px #44444421;
+}
+
+.third-cms-edit button {
+  height: 2rem;
+  width: 2rem;
+  margin: 0.25rem;
+  padding: 0.125rem;
+  border-radius: 0.45rem;
+
+  /* Button Reset */
+  background-color: #eeeeee;
+  border: none;
+
+  /* Centering Icon */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-clean {
+  box-shadow: none;
+}
+
+.button-up {
+  box-shadow: 3px 3px 7px #b3b3b3, -3px -3px 7px #ffffff;
+}
+
+.button-up svg {
+  fill: rgba(43, 43, 43, 0.55);
+}
+
+.button-down {
+}
+
+.button-down svg {
+  fill: rgba(216, 149, 149, 0.55);
+}
+
+.third-cms-edit-icon {
+  height: 70%;
+  width: 70%;
+}
+
+/* NgClass Classes */
+.cms-hide {
+  display: none;
+}
+
+.cms-show {
+  display: block;
 }
