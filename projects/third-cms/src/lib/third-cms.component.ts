@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ThirdCmsComponent implements OnInit {
   // Inputs
   @Input() Auth: any;
+  @Input() CmsID: any;
 
   // 1. User is admin and may edit content
   isAdmin: boolean;
@@ -20,7 +21,6 @@ export class ThirdCmsComponent implements OnInit {
   // 3. Content Variables
   imageUrl?: string;
   textString?: string;
-  tempImg: any;
 
   // 4. CMS Type Definition
   cmsType: number; // 0 = Empty, 1 = Image, 2 = Text, 3 = ...etc
@@ -42,7 +42,6 @@ export class ThirdCmsComponent implements OnInit {
     // 4. CMS Type Definition & Classes
     this.cmsType = 0;
     this.cmsClassDisplay = ['cms-hide', 'cms-hide', 'cms-hide'];
-    this.tempImg = 'upload here';
   }
 
   // Toggle Editing UI
@@ -109,5 +108,6 @@ export class ThirdCmsComponent implements OnInit {
   ngOnInit(): void {
     this.setAdmin(this.Auth);
     this.setCmsType(this.cmsType);
+    console.log(this.CmsID);
   }
 }
