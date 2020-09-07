@@ -29,6 +29,10 @@
   font-size: medium !important;
 }
 
+.hide {
+  display: none;
+}
+
 /* Editing UI CSS  */
 .third-cms-edit {
   border-radius: 0.75rem;
