@@ -13,6 +13,7 @@
 
 .third-cms-img {
   object-fit: cover;
+  z-index: 0;
 }
 
 .third-cms-text {
@@ -30,25 +31,30 @@
 
 /* Editing UI CSS  */
 .third-cms-edit {
-  border-radius: 0.7rem;
+  border-radius: 0.75rem;
   display: flex;
-  flex-flow: row-reverse;
-  top: 0.5rem;
-  right: 0.5rem;
+  flex-direction: row-reverse;
+  top: 0;
+  right: 0;
   position: absolute;
   background-color: #eeeeee;
-  padding: 0.5rem;
+  padding: 0.35rem;
   z-index: 1;
 
-  box-shadow: 4px 4px 4px #44444421;
+  box-shadow: 0px 5px 6px #44444465;
+}
+
+@media only screen and (orientation: portrait) {
+  .third-cms-edit {
+    flex-direction: column;
+  }
 }
 
 .third-cms-edit button {
-  height: 2rem;
   width: 2rem;
+  height: 2rem;
   margin: 0.25rem;
-  padding: 0.125rem;
-  border-radius: 0.45rem;
+  border-radius: 0.65rem;
 
   /* Button Reset */
   background-color: #eeeeee;
@@ -66,6 +72,7 @@
 
 .button-up {
   box-shadow: 3px 3px 7px #b3b3b3, -3px -3px 7px #ffffff;
+  transition: 0.15s ease-in-out;
 }
 
 .button-up svg {
@@ -73,10 +80,16 @@
 }
 
 .button-down {
+  box-shadow: inset 3px 3px 7px #b3b3b3, inset -3px -3px 7px #ffffff;
+  transition: 0.15s ease-in-out;
 }
 
 .button-down svg {
   fill: rgba(216, 149, 149, 0.55);
+}
+
+.button-confirm svg {
+  fill: #62a57ba9;
 }
 
 .third-cms-edit-icon {
@@ -91,4 +104,15 @@
 
 .cms-show {
   display: block;
+}
+
+/* ngClass Hack */
+.background-transparent {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.background-transparent button {
+  opacity: 0.85;
+  box-shadow: 3px 3px 2px #44444465 !important;
 }
