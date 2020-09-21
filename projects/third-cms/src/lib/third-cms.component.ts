@@ -10,41 +10,44 @@ export class ThirdCmsComponent implements OnInit {
   @Input() Auth: any;
   @Input() CmsID: any;
 
-  // 1. User is admin and may edit content
+  // 1. User is admin and may edit content.
   isAdmin: boolean;
   serviceAdmin: string;
 
-  // 2. Toggles for editing UI
+  // 2. Toggles for editing UI.
   editToggle: boolean;
   textEdit: boolean;
 
-  // 3. Content Variables
-  imageUrl?: string;
+  // 3. Content Variables.
+  imageUrl?: any;
+  imagePath?: any;
   textString?: string;
+  tempImg: any;
 
-  // 4. CMS Type Definition
+  // 4. CMS Type Definition.
   cmsType: number; // 0 = Empty, 1 = Image, 2 = Text, 3 = ...etc
   cmsClassDisplay: string[];
 
   constructor() {
-    // 1. User is admin
+    // 1. User is admin.
     this.isAdmin = false;
     this.serviceAdmin = 'admin@app.com';
 
-    // 2. Toggles for editing UI
+    // 2. Toggles for editing UI.
     this.editToggle = false;
 
-    // 3. Content Variables
-    this.imageUrl =
-      'https://res.cloudinary.com/carlhernek/image/upload/v1594818036/SAR-demo/Restaurants/orlova-maria-oMTlhdFUhdI-unsplash_tfbudv.jpg';
+    // 3. Content Variables.
+    this.imageUrl = null;
+    this.imagePath = null;
     this.textString = null;
 
-    // 4. CMS Type Definition & Classes
+    // 4. CMS Type Definition & Classes.
     this.cmsType = 0;
     this.cmsClassDisplay = ['cms-hide', 'cms-hide', 'cms-hide'];
+    this.tempImg = 'upload here';
   }
 
-  // Toggle Editing UI
+  // Toggle Editing UI.
   editButton = () => {
     if (this.editToggle) {
       this.editToggle = false;
@@ -53,13 +56,19 @@ export class ThirdCmsComponent implements OnInit {
     }
   };
 
-  // Image editing functions
+  // Image editing functions.
+  // Preview code for angular found at: https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/
   onFileChanged(event: any) {
-    const file = event.target.files[0];
-    console.log(file);
+    const file = event.target.files;
+    let reader = new FileReader();
+    this.imagePath = file[4];
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event) => {
+      this.imageUrl = reader.result;
+    };
   }
 
-  // Text editing functions
+  // Text editing functions.
   editText = () => {
     if (this.textEdit) {
       this.formatTextContent();
@@ -78,13 +87,14 @@ export class ThirdCmsComponent implements OnInit {
     }
   };
 
+  // Temporary fix to contenteditable bug.
   formatTextContent = () => {
     let textToFormat = this.textString;
     const regex = /<br>/gi;
     this.textString = textToFormat.replace(regex, ' ');
   };
 
-  // Authorizes the user as admin
+  // Authorizes the user as admin.
   setAdmin = (auth: string) => {
     if (auth === this.serviceAdmin) {
       this.isAdmin = true;
@@ -93,7 +103,7 @@ export class ThirdCmsComponent implements OnInit {
     }
   };
 
-  // Changes the CMS type
+  // Changes the CMS type.
   setCmsType = (type: number) => {
     for (var i = 0; i < this.cmsClassDisplay.length; i++) {
       this.cmsClassDisplay[i] = 'cms-hide';
@@ -108,6 +118,5 @@ export class ThirdCmsComponent implements OnInit {
   ngOnInit(): void {
     this.setAdmin(this.Auth);
     this.setCmsType(this.cmsType);
-    console.log(this.CmsID);
   }
 }
