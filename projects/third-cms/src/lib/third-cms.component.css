@@ -8,7 +8,7 @@
 }
 
 .third-cms-wrapper {
-  background-color: white;
+  background-color: transparent;
 }
 
 .third-cms-img {
@@ -26,7 +26,6 @@
 
 .third-cms-text p {
   margin: 0.3rem 0.8rem 0 0.8rem;
-  font-size: medium !important;
 }
 
 .hide {
