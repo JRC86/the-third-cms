@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
+import { ThirdCmsService } from './third-cms.service';
 
 @Component({
   selector: 'the-third-cms',
@@ -28,7 +29,10 @@ export class ThirdCmsComponent implements OnInit {
   cmsType: number; // 0 = Empty, 1 = Image, 2 = Text, 3 = ...etc
   cmsClassDisplay: string[];
 
-  constructor() {
+
+
+
+  constructor(private cmsService: ThirdCmsService) {
     // 1. User is admin.
     this.isAdmin = false;
     this.serviceAdmin = 'admin@app.com';
@@ -45,6 +49,7 @@ export class ThirdCmsComponent implements OnInit {
     this.cmsType = 0;
     this.cmsClassDisplay = ['cms-hide', 'cms-hide', 'cms-hide'];
     this.tempImg = 'upload here';
+
   }
 
   // Toggle Editing UI.
