@@ -30,9 +30,14 @@ export class ThirdCmsComponent implements OnInit {
   cmsClassDisplay: string[];
 
 
+  //CmsItems for this page.
+
+  cmsItems: any[];
 
 
   constructor(private cmsService: ThirdCmsService) {
+
+    console.log("Component const");
     // 1. User is admin.
     this.isAdmin = false;
     this.serviceAdmin = 'admin@app.com';
@@ -49,6 +54,14 @@ export class ThirdCmsComponent implements OnInit {
     this.cmsType = 0;
     this.cmsClassDisplay = ['cms-hide', 'cms-hide', 'cms-hide'];
     this.tempImg = 'upload here';
+
+
+    //Get CmsItems for this page.
+    this.cmsService.get('').subscribe( item => {
+      console.log('Getting... ' + JSON.stringify(item));
+      this.cmsItems.push(item);
+    });
+
 
   }
 

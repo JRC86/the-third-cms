@@ -8,7 +8,7 @@ export class ThirdCmsService   {
 
   private apiUrl = 'https://localhost:5001/api/Cms/';
   constructor(private httpClient: HttpClient) {
-
+      console.log("Service const");
 
   }
 
