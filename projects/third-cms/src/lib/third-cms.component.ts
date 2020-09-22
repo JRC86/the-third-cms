@@ -9,7 +9,7 @@ import { ThirdCmsService } from './third-cms.service';
 export class ThirdCmsComponent implements OnInit {
   // Inputs
   @Input() Auth: any;
-  @Input() CmsID: any;
+  @Input() CmsId: any;
 
   // 1. User is admin and may edit content.
   isAdmin: boolean;
@@ -26,21 +26,18 @@ export class ThirdCmsComponent implements OnInit {
   tempImg: any;
 
   // 4. CMS Type Definition.
-  cmsType: number; // 0 = Empty, 1 = Image, 2 = Text, 3 = ...etc
+  cmsType: number; // 0 = Empty, 1 = Image, 2 = Text, 3 = ...etc.
   cmsClassDisplay: string[];
 
-
-  //CmsItems for this page.
-
+  // 5. CmsItems & Cms ID
+  cmsId: number; // Must be unique for url.
+  cmsUrl: string;
   cmsItems: any[];
 
-
   constructor(private cmsService: ThirdCmsService) {
-
-    console.log("Component const");
     // 1. User is admin.
     this.isAdmin = false;
-    this.serviceAdmin = 'admin@app.com';
+    this.serviceAdmin = 'admin@app.com'; // Hard coded for demo purposes.
 
     // 2. Toggles for editing UI.
     this.editToggle = false;
@@ -55,29 +52,31 @@ export class ThirdCmsComponent implements OnInit {
     this.cmsClassDisplay = ['cms-hide', 'cms-hide', 'cms-hide'];
     this.tempImg = 'upload here';
 
-
-    //Get CmsItems for this page.
-    this.cmsService.get('').subscribe( item => {
-      console.log('Getting... ' + JSON.stringify(item));
+    // 5. Get CmsItems for this page & set cmsId.
+    this.cmsService.get('').subscribe((item) => {
       this.cmsItems.push(item);
     });
-
-
+    this.cmsId = this.CmsId;
+    this.cmsUrl = window.location.href;
   }
 
   // Toggle Editing UI.
   editButton = () => {
     if (this.editToggle) {
       this.editToggle = false;
+      // UPLOAD cmsItem here.
+      // Upload function needs to check if itemData is the same as currently in the app and not upload if that is the case.
     } else {
       this.editToggle = true;
     }
   };
 
   // Image editing functions.
-  // Preview code for angular found at: https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/
+  // Preview code for angular found at: https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/.
   onFileChanged(event: any) {
+    // Set file as preview.
     const file = event.target.files;
+    console.log(file[0]);
     let reader = new FileReader();
     this.imagePath = file[4];
     reader.readAsDataURL(file[0]);
@@ -89,7 +88,9 @@ export class ThirdCmsComponent implements OnInit {
   // Text editing functions.
   editText = () => {
     if (this.textEdit) {
-      this.formatTextContent();
+      let textToFormat = this.textString;
+      const regex = /<br>/gi;
+      this.textString = textToFormat.replace(regex, '');
       this.textEdit = false;
     } else {
       this.textEdit = true;
@@ -103,13 +104,6 @@ export class ThirdCmsComponent implements OnInit {
     if (text !== this.textString) {
       this.textString = text;
     }
-  };
-
-  // Temporary fix to contenteditable bug.
-  formatTextContent = () => {
-    let textToFormat = this.textString;
-    const regex = /<br>/gi;
-    this.textString = textToFormat.replace(regex, ' ');
   };
 
   // Authorizes the user as admin.
